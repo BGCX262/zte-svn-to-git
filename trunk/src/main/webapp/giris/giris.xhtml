@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:view>
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title>
+                Türk Telekom - Giriş
+            </title>
+
+            
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/tema/themes/aristo/skin.css" />
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/stil.css" />
+            <h:outputText value="#{applicationBean}" style="display: none"/>
+        </h:head>
+        <h:body styleClass="login">
+            <div class="login-div">
+            <center>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p:outputPanel layout="block" style="width:100%;height:600PX;border:0px solid #666666; vertical-align: middle">
+                    <p:spacer height="100px"/><br/>
+<!--                    <h:graphicImage url="/resources/imajlar/TURK-TELEKDM-LOGO.jpg"/><br/>-->
+                    <p:spacer height="10px"/><br/>
+                    <p:panel id="girisEkrani" header="Kullanıcı Girişi" 
+                             style="width:300px;height:150px;" >
+                        <form name="f" action="#{request.contextPath}/j_spring_security_check" method="POST">
+                            <table>
+                                <tr>
+                                    <td>Kullanıcı Adı</td>
+                                    <td>:<input type="text" name="j_username" value=""/></td>
+                                </tr>
+                                <tr>
+                                    <td>Şifre</td>
+                                    <td>:<input type="password" name="j_password"/></td>
+                                </tr>
+                                <tr>
+                                    <td  colspan="2" align="left">
+<!--                                        <input type="checkbox" name="_spring_security_remember_me"/>
+                                        Beni hatırla-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right">
+                                        <input name="reset" type="reset" value="Temizle"/><input name="submit" type="submit" value="Giriş"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+                        <h:outputText style="color: red" value="#{SPRING_SECURITY_LAST_EXCEPTION.message}"/>
+                    </p:panel>
+                    <p:draggable for="girisEkrani" containment="parent" />
+                </p:outputPanel>
+       <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </center>
+            </div>
+        </h:body>
+    </f:view>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+        
+    <application>
+        <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+        <resource-bundle>
+            <var>etiket</var>
+            <base-name>etiketler</base-name>
+        </resource-bundle>
+        <resource-bundle>
+            <var>msj</var>
+            <base-name>mesajlar</base-name>
+        </resource-bundle>
+        <resource-bundle>
+            <var>lnk</var>
+            <base-name>linkler</base-name>
+        </resource-bundle>
+        <resource-bundle>
+            <var>rol</var>
+            <base-name>roller</base-name>
+        </resource-bundle>
+    </application>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>siteSarf</from-outcome>
+            <to-view-id>/content/siteSarf/siteSarf.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>tssForm</from-outcome>
+            <to-view-id>/content/tssForm/tssForm.xhtml</to-view-id>
+            <redirect>true</redirect>
+        </navigation-case>
+
+
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>welcome</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+   
+</faces-config>

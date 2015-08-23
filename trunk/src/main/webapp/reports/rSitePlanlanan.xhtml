@@ -1,0 +1,53 @@
+<ui:composition template="#{lnk.sablon}"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        #{etiket.sitePlanlananBean}
+
+
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid columns="2">
+                <p:outputPanel>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Bolgelere Gore Siparis Listesi ve Nominal Plan"/>
+
+
+                    </h:panelGrid>
+                    <p:pieChart value="#{rSitePlanlanan.splanlanans}" var="row"
+                                categoryField="#{row.bolge}" width="400px"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Onay Durumuna Gore"/>
+                    </h:panelGrid>
+                    <p:columnChart value="#{rSitePlanlanan.siteSarfs}" var="row" xfield="#{row.dbSiteID.bolge}">
+                        <p:chartSeries label="Onaylandi" value="#{rSitePlanlanan.hesapla(row,'Onaylandi',row.dbSiteID.bolge)}"/>
+                        <p:chartSeries label="Beklemede" value="#{rSitePlanlanan.hesapla2(row,'Beklemede',row.dbSiteID.bolge)}"/>
+                        <p:chartSeries label="Red" value="#{rSitePlanlanan.hesapla3(row,'Reddedildi',row.dbSiteID.bolge)}"/>
+                    </p:columnChart>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Onay Durumuna Gore"/>
+
+
+                    </h:panelGrid>
+                    <p:pieChart value="#{rSitePlanlanan.siteSarfs}" var="row"
+                                categoryField="#{row.onayDurum}" width="400px"
+                                />
+                </p:outputPanel>
+            </h:panelGrid>
+
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="body">
+
+
+    </ui:define>
+</ui:composition>

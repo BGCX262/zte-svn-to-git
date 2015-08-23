@@ -1,0 +1,435 @@
+<ui:composition template="#{lnk.sablon}"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        #{etiket.tssFormu}
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:spacer height="5" />
+            <div style="margin-left: 5px">
+                <h2>#{etiket.SiparisveNominalPlanBilgileri} -
+                    <h:outputText value="#{tssFormuBean.sitePlanan.sahaKodu}"/></h2>
+                <h:panelGrid columns="4" width="500">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{etiket.vendor}:" for="vendor" />
+                        <h:outputText id="vendor" value="#{tssFormuBean.sitePlanan.vendor}" title="Vendor" style="font-weight: bold"/>
+                        <h:outputLabel value="#{etiket.bolge}:" for="bolge" />
+                        <h:outputText id="bolge" value="#{tssFormuBean.sitePlanan.bolge}" title="Bolge" style="font-weight: bold"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{etiket.faz}:" for="faz" />
+                        <h:outputText id="faz" value="#{tssFormuBean.sitePlanan.faz}" title="Faz" style="font-weight: bold"/>
+                        <h:outputLabel value="#{etiket.ilce}:" for="ilceID" />
+                        <h:outputText id="ilceID" value="#{tssFormuBean.sitePlanan.ilceID.ilceAdi}" title="IlceID" style="font-weight: bold"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{etiket.sahaKod}" for="sahaKodu" />
+                        <h:outputText id="sahaKodu" value="#{tssFormuBean.sitePlanan.sahaKodu}" title="SahaKodu" style="font-weight: bold"/>
+                        <h:outputLabel value="#{etiket.sahaAd}:" for="sahaAdi" />
+                        <h:outputText id="sahaAdi" value="#{tssFormuBean.sitePlanan.sahaAdi}" title="SahaAdi" style="font-weight: bold"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{etiket.siparisTarihi}:" for="siparisTarihi" />
+                        <h:outputText id="siparisTarihi" value="#{tssFormuBean.sitePlanan.siparisTarihi}" converter="calendarConverter" title="SiparisTarihi" style="font-weight: bold"/>
+                        <h:outputLabel value="#{etiket.sehir}:" for="sehirID" />
+                        <h:outputText id="sehirID" value="#{tssFormuBean.sitePlanan.sehirID.sehir}" title="SehirID" style="font-weight: bold"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <h2>#{etiket.NominalPlanSarfBilgileri} -
+                    <h:outputText value="#{tssFormuBean.siteSarf.sahaKoduAdayNo}"/></h2>
+                <h:panelGrid columns="4" width="900">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Aday No:" for="adayNo" />
+                        <h:outputText style="font-weight: bold" id="adayNo" value="#{tssFormuBean.siteSarf.adayNo}" title="AdayNo" />
+                        <h:outputLabel value="Saha Kodu Aday No:" for="sahaKoduAdayNo" />
+                        <h:outputText style="font-weight: bold" id="sahaKoduAdayNo" value="#{tssFormuBean.siteSarf.sahaKoduAdayNo}" title="SahaKoduAdayNo" />
+                        <h:outputLabel value="#{etiket.HazirlanmaTarihi}:" for="hazirlanmaTarihi" />
+                        <h:outputText style="font-weight: bold" converter="calendarConverter" id="hazirlanmaTarihi" value="#{tssFormuBean.siteSarf.hazirlanmaTarihi}" title="HazirlanmaTarihi"/>
+                        <h:outputLabel value="Sunulma Tarihi:" for="sunulmaTarihi" />
+                        <h:outputText style="font-weight: bold" converter="calendarConverter"  id="sunulmaTarihi" value="#{tssFormuBean.siteSarf.sunulmaTarihi}" title="SunulmaTarihi" />
+                        <h:outputLabel value="Onay Durum:" for="onayDurum" />
+                        <h:outputText style="font-weight: bold" id="onayDurum" value="#{tssFormuBean.siteSarf.onayDurum}" title="OnayDurum" />
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Onay Tarihi:" for="onayTarihi" />
+                        <h:outputText style="font-weight: bold" converter="calendarConverter" id="onayTarihi" value="#{tssFormuBean.siteSarf.onayTarihi}" title="OnayTarihi" />
+                        <h:outputLabel value="Enerji Tipi:" for="enerjiTipi" />
+                        <h:outputText style="font-weight: bold" id="enerjiTipi" value="#{tssFormuBean.siteSarf.enerjiTipi}" title="EnerjiTipi" />
+                        <h:outputLabel value="Kurulu mu:" for="isColocated" />
+                        <h:outputText style="font-weight: bold" id="isColocated" value="#{tssFormuBean.siteSarf.isColocated}" title="IsColocated" />
+                        <h:outputLabel value="Transmisyon Yontemi:" for="transmisyonYontemi" />
+                        <h:outputText style="font-weight: bold" id="transmisyonYontemi" value="#{tssFormuBean.siteSarf.transmisyonYontemi}" title="TransmisyonYontemi" />
+                        <h:outputLabel value="Kurulum Sahip:" for="colocatedOwner" />
+                        <h:outputText style="font-weight: bold" id="colocatedOwner" value="#{tssFormuBean.siteSarf.colocatedOwner}" title="ColocatedOwner" />
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{etiket.mucbirSebepBaslangicTarihi}:" for="mucbirSebepBaslangicTarihi" />
+                        <h:outputText style="font-weight: bold" converter="calendarConverter" id="mucbirSebepBaslangicTarihi" value="#{tssFormuBean.siteSarf.mucbirSebepBaslangicTarihi}" title="MucbirSebepBaslangicTarihi" />
+                        <h:outputLabel value="#{etiket.mucbirSebepBitisTarihi}:" for="mucbirSebepBitisTarihi" />
+                        <h:outputText style="font-weight: bold" converter="calendarConverter" id="mucbirSebepBitisTarihi" value="#{tssFormuBean.siteSarf.mucbirSebepBitisTarihi}" title="MucbirSebepBitisTarihi" />
+                        <h:outputLabel value="#{etiket.kuleYukseklik}:" for="kuleYukseklik" />
+                        <h:outputText style="font-weight: bold" id="kuleYukseklik" value="#{tssFormuBean.siteSarf.kuleYukseklik}" title="KuleYukseklik" />
+                        <h:outputLabel value="Enlem:" for="enlem" />
+                        <h:outputText style="font-weight: bold" id="enlem" value="#{tssFormuBean.siteSarf.enlem}" title="Enlem" />
+                        <h:outputLabel value="Boylam:" for="boylam" />
+                        <h:outputText style="font-weight: bold" id="boylam" value="#{tssFormuBean.siteSarf.boylam}" title="Boylam" />
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Saha Son Durumu:" for="sahaSonDurumu" />
+                        <h:outputText style="font-weight: bold" id="sahaSonDurumu" value="#{tssFormuBean.siteSarf.sahaSonDurumu}" title="SahaSonDurumu" />
+                        <h:outputLabel value="Transmisyon Yolu:" for="transmisyonYolu" />
+                        <h:outputText style="font-weight: bold" id="transmisyonYolu" value="#{tssFormuBean.siteSarf.transmisyonYolu}" title="TransmisyonYolu" />
+                        <h:outputLabel value="#{etiket.detayliSahaTipi}:" for="detayliSahaTipi" />
+                        <h:outputText style="font-weight: bold" id="detayliSahaTipi" value="#{tssFormuBean.siteSarf.detayliSahaTipi}" title="DetayliSahaTipi" />
+                        <h:outputLabel value="#{etiket.sarfDokumanDosyaAdi}:" for="sarfDokumanDosyaAdi" />
+                        <h:outputText style="font-weight: bold" id="sarfDokumanDosyaAdi" value="#{tssFormuBean.siteSarf.sarfDokumanDosyaAdi}" title="SarfDokumanDosyaAdi" />
+                    </h:panelGrid>
+                </h:panelGrid>
+
+                <h2><h:outputText value="#{etiket.yapilanIsler}"/></h2>
+
+
+                <p:spacer height="25"/>
+                <p:tabView  effect="fade">
+
+                    <p:tab title="#{etiket.Kiralama}">
+                        <h:panelGrid columns="2">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="2">
+
+                                    <h:outputLabel value="#{etiket.AlanTuru}:" for="alanTuru" />
+
+                                    <h:selectOneMenu id="alanTuru" value="#{tssFormuBean.kiralamaTablo.alanTuru}" title="AlanTuru">
+                                        <f:selectItem noSelectionOption="true" itemLabel="#{etiket.seciniz}"/>
+                                        <f:selectItems value="#{applicationBean.kiralananAlanTur}"/>
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="Mal Sahibi:" for="malSahibi" />
+                                    <p:inputText id="malSahibi" value="#{tssFormuBean.kiralamaTablo.malSahibi}" title="MalSahibi" />
+                                    <h:outputLabel value="#{etiket.SorumluAdi}:" for="contactName" />
+                                    <p:inputText id="contactName" value="#{tssFormuBean.kiralamaTablo.contactName}" title="ContactName" />
+                                    <h:outputLabel value="Sorumlu Telefon:" for="contactTelefon" />
+                                    <p:inputText id="contactTelefon" value="#{tssFormuBean.kiralamaTablo.contactTelefon}" title="ContactTelefon" />
+                                </h:panelGrid>
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel value="#{etiket.IletisimAdresi}:" for="iletisimAdresi" />
+                                    <p:inputText id="iletisimAdresi" value="#{tssFormuBean.kiralamaTablo.iletisimAdresi}" title="IletisimAdresi" />
+                                    <h:outputLabel value="#{etiket.kayitTarihi}:"  />
+                                    <p:calendar pattern="dd.MM.yyyy"  converter="calendarConverter" id="kayitTarihi" value="#{tssFormuBean.kiralamaTablo.kayitTarihi}" title="KayitTarihi" />
+                                    <h:outputLabel value="Kiralama Durum:" for="kiralamaDurum" />
+                                    <h:selectOneMenu id="kiralamaDurum" value="#{tssFormuBean.kiralamaTablo.kiralamaDurum}" title="KiralamaDurum">
+                                        <f:selectItem noSelectionOption="true" itemLabel="#{etiket.seciniz}"/>
+                                        <f:selectItems value="#{applicationBean.kiralamaDurum}"/>
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="#{etiket.kontratImzaTarihi}:" for="kontratImzaTarihi" />
+                                    <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="kontratImzaTarihi" value="#{tssFormuBean.kiralamaTablo.kontratImzaTarihi}" title="KontratImzaTarihi" />
+                                    <h:outputLabel value="#{etiket.Taseron}:" for="SATaseron" />
+                                    <p:inputText id="SATaseron" value="#{tssFormuBean.kiralamaTablo.SATaseron}" title="SATaseron" />
+                                </h:panelGrid>
+                            </h:panelGrid>
+                            <h:panelGrid columns="1">
+                                <p:commandButton value="#{etiket.ekle}" onclick="dlg_yeniYorum.show()"
+                                                 image="ui-icon ui-icon-person" update="grid" process="frm_yeniYorum"/>
+
+                                <p:dataTable value="#{tssFormuBean.yorumlarList}" var="item"  rows="15" paginator="true" paginatorPosition="bottom"
+                                             emptyMessage="#{etiket.kayitYok}">
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Telekom Yorum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.telekomYorum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Telekom Yorum Tarihi"/>
+                                        </f:facet>
+                                        <h:outputText converter="calendarConverter" value="#{item.telekomYorumTarihi}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Vendor Yorum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.vendorYorum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText  value="Vendor Yorum Tarihi"/>
+                                        </f:facet>
+                                        <h:outputText converter="calendarConverter" value="#{item.vendorYorumTarihi}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton ajax="false" value="#{tssFormuBean.kiralamaTablo.dbSAID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{tssFormuBean.saveKiralamaTablo_actionListener}"/>
+                    </p:tab>
+
+                    <p:tab title="#{etiket.tssFormu}">
+                        <h:panelGrid columns="2">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Tss Tarihi:" for="tssTarihi" />
+                                <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="tssTarihi" value="#{tssFormuBean.tssFrom.tssTarihi}" title="TssTarihi" />
+                                <h:outputLabel value="Tss Teslim Tarihi:" for="tssTeslimTarihi" />
+                                <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="tssTeslimTarihi" value="#{tssFormuBean.tssFrom.tssTeslimTarihi}" title="TssTeslimTarihi" />
+                                <h:outputLabel value="Tss Dokuman Dosyasi:" />
+                                <h:panelGroup id="pnlGroupUpload">
+                                    <p:fileUpload  image="/resources/imajlar/upload.png" style="padding-left: 0px;padding-right: 0px;margin: 0px" update="pnlGroupUpload" label="Seciniz" fileUploadListener="#{tssFormuBean.handleFileUpload}"
+                                                   allowTypes="*.doc;*.docx;*.xlsx;*.jpg;*.gif;*.jpeg"  />
+                                    <h:outputText value="#{tssFormuBean.tssFrom.tssDokumanDosyaYolu}" /><br/>
+                                    <p:commandButton ajax="false" value="#{etiket.indir}" rendered="#{tssFormuBean.tssFrom.tssDokumanDosyaYolu!=null}" actionListener="#{tssFormuBean.downloadDokuman(tssFormuBean.tssFrom.tssDokumanDosyaYolu)}"/>
+                                </h:panelGroup>
+
+                            </h:panelGrid>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Tss Onay Durumu:" for="tssOnayDurumu" />
+                                <h:selectOneMenu id="tssOnayDurumu" value="#{tssFormuBean.tssFrom.tssOnayDurumu}" title="TssOnayDurumu" >
+                                    <f:selectItem noSelectionOption="true" itemLabel="#{etiket.seciniz}"/>
+                                    <f:selectItems value="#{applicationBean.onayDurum}"/>
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Tss Onay Yorum:" for="tssOnayYorum" />
+                                <p:inputText id="tssOnayYorum" value="#{tssFormuBean.tssFrom.tssOnayYorum}" title="TssOnayYorum" />
+                                <h:outputLabel value="Tss Telekom Onay Tarihi:" for="tssTelekomOnayTarihi" />
+                                <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="tssTelekomOnayTarihi" value="#{tssFormuBean.tssFrom.tssTelekomOnayTarihi}" title="TssTelekomOnayTarihi" />
+                                <h:outputLabel value="#{etiket.btkBasvuruTarihi}:" for="btkBasvuruTarihi" />
+                                <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="btkBasvuruTarihi" value="#{tssFormuBean.tssFrom.btkBasvuruTarihi}" title="BtkBasvuruTarihi" />
+                                <h:outputLabel value="Btk Sertifika Tarihi:" for="btkSertifikaTarihi" />
+                                <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="btkSertifikaTarihi" value="#{tssFormuBean.tssFrom.btkSertifikaTarihi}" title="BtkSertifikaTarihi" />
+                            </h:panelGrid>
+                        </h:panelGrid>
+                        <p:commandButton ajax="false" value="#{tssFormuBean.tssFrom.dbTSSRID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{tssFormuBean.saveTSSForm_actionListener}"/>
+                    </p:tab>
+
+                    <p:tab title="#{etiket.Islemler}">
+                        <p:commandButton value="#{etiket.ekle}" onclick="dlg_yeniIslem.show()"
+                                         image="ui-icon ui-icon-person" update="grid" process="frm_yeniIslem"/>
+
+
+                                <p:dataTable  id="dt_yapilanIsler" value="#{tssFormuBean.yapilanislerList}" var="item" 
+                                              rows="15" paginator="true" paginatorPosition="bottom" >
+
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.ustislem}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dbUstIslemTipiID.ustIslemAdi}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.altislem}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dbAltIslemTipiID.altIslemAdi}"/>
+                                    </p:column>
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.planlananBaslamaTarihi}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.planlananBaslamaTarihi}" converter="calendarConverter"/>
+                                    </p:column>
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.PlanlananBitisTarih}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.planlananBitisTarihi}" converter="calendarConverter"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.GerceklesenBaslamaTarihi}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.gerceklesenBaslamaTarihi}" converter="calendarConverter"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.gerceklesenBitisTarihi}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.gerceklesenBitisTarihi}" converter="calendarConverter"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Durum"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.isDurum}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.Taseron}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.taseronBilgileri}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.taseronIletisimBilgileri}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.taseronIletisimBilgileri}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{etiket.aciklama}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.aciklama}"/>
+                                    </p:column>
+                                </p:dataTable>
+                      
+
+                    </p:tab>
+
+                    <p:tab title="#{etiket.KapsananYerler}">
+
+
+                        <h:panelGrid columns="2">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 1:" for="yerlesimAdi1" />
+                                <p:inputText id="yerlesimAdi1" value="#{tssFormuBean.kapsananYerler.yerlesimAdi1}" title="YerlesimAdi1" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 2:" for="yerlesimAdi2" />
+                                <p:inputText id="yerlesimAdi2" value="#{tssFormuBean.kapsananYerler.yerlesimAdi2}" title="YerlesimAdi2" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 3:" for="yerlesimAdi3" />
+                                <p:inputText id="yerlesimAdi3" value="#{tssFormuBean.kapsananYerler.yerlesimAdi3}" title="YerlesimAdi3" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 4:" for="yerlesimAdi4" />
+                                <p:inputText id="yerlesimAdi4" value="#{tssFormuBean.kapsananYerler.yerlesimAdi4}" title="YerlesimAdi4" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 5:" for="yerlesimAdi5" />
+                                <p:inputText id="yerlesimAdi5" value="#{tssFormuBean.kapsananYerler.yerlesimAdi5}" title="YerlesimAdi5" />
+                            </h:panelGrid>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 6:" for="yerlesimAdi6" />
+                                <p:inputText id="yerlesimAdi6" value="#{tssFormuBean.kapsananYerler.yerlesimAdi6}" title="YerlesimAdi6" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 7:" for="yerlesimAdi7" />
+                                <p:inputText id="yerlesimAdi7" value="#{tssFormuBean.kapsananYerler.yerlesimAdi7}" title="YerlesimAdi7" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 8:" for="yerlesimAdi8" />
+                                <p:inputText id="yerlesimAdi8" value="#{tssFormuBean.kapsananYerler.yerlesimAdi8}" title="YerlesimAdi8" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 9:" for="yerlesimAdi9" />
+                                <p:inputText id="yerlesimAdi9" value="#{tssFormuBean.kapsananYerler.yerlesimAdi9}" title="YerlesimAdi9" />
+                                <h:outputLabel value="#{etiket.yerlesimAdi} 10:" for="yerlesimAdi10" />
+                                <p:inputText id="yerlesimAdi10" value="#{tssFormuBean.kapsananYerler.yerlesimAdi10}" title="YerlesimAdi10" />
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton ajax="false" value="#{tssFormuBean.kapsananYerler.dbKapsananYerlerID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{tssFormuBean.saveKapsananYerler_actionListener}"/>
+
+                    </p:tab>
+
+
+                </p:tabView>
+
+            </div>
+
+        </h:form>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <p:spacer height="20"/>
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form prependId="false">
+            <p:growl showDetail="true" />
+
+            <p:dialog widgetVar="dlg_dialog"  modal="true" draggable="false" header="#{etiket.uyari}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel toggleable="false" closable="false" widgetVar="pnl_tssFormu_dialog" visible="true" >
+                    <h:panelGrid columns="1">
+                        <h:outputText value="#{etiket.secilenSatirSilinecek}"/>
+                    </h:panelGrid>
+                    <f:verbatim/>
+                    <h:panelGrid columns="2">
+                        <p:commandButton ajax="false"  value="#{etiket.iptal}" action="tssFormu"/>
+                        <p:commandButton ajax="false"  value="#{etiket.sil}" actionListener="#{tssFormuBean.remove_actionListener}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+            </p:dialog>
+        </h:form>
+
+        <h:form id="frm_yeniIslem" prependId="false">
+            <p:dialog widgetVar="dlg_yeniIslem"  modal="true" draggable="true" header="#{etiket.IslemEkle}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel id="pnl_yeniIslem" toggleable="false" closable="false" widgetVar="pnl_yeniIslem" visible="true" >
+                    <h:panelGrid columns="2">
+
+                        <h:outputLabel value="#{etiket.dbUstIslemTipiID}:" for="dbUstIslemTipiID" />
+                        <h:selectOneMenu id="dbUstIslemTipiID" value="#{tssFormuBean.ustIslemId}" title="DbUstIslemTipiID" >
+                            <f:selectItem noSelectionOption="true" itemLabel="#{etiket.seciniz}"/>
+                            <f:selectItems value="#{applicationBean.ustIslem}"/>
+                            <f:ajax event="change" execute="@this" render="dbAltIslemTipiID"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{etiket.dbAltIslemTipiID}:" for="dbAltIslemTipiID" />
+                        <h:selectOneMenu id="dbAltIslemTipiID" value="#{tssFormuBean.altIslemId}" title="DbAltIslemTipiID" >
+                            <f:selectItem noSelectionOption="true" itemLabel="#{etiket.seciniz}"/>
+                            <f:selectItems value="#{applicationBean.altIslem4SelectList(tssFormuBean.ustIslemId)}"/>
+                        </h:selectOneMenu>
+
+
+                        <h:outputText value="*#{etiket.sehir}" />
+                        <h:selectOneMenu  valueChangeListener="#{sitePlanlananBean.sarf_sehir_valueChangeListener}" value="#{sitePlanlananBean.ilKod}"  >
+                            <f:selectItem noSelectionOption="true" itemLabel="Seciniz" />
+                            <f:selectItems value="#{applicationBean.sehir}" />
+                            <f:ajax event="change" execute="@this" render="ddIlce"/>
+                        </h:selectOneMenu>
+
+                        <h:outputText value="*#{etiket.ilce}" />
+                        <h:selectOneMenu id="ddIlce" value="#{sitePlanlananBean.ilceKod}"  >
+                            <f:selectItems value="#{applicationBean.ilce4SelectList(sitePlanlananBean.ilKod)}" />
+                        </h:selectOneMenu>
+
+
+
+
+                        <h:outputLabel value="#{etiket.planlananBaslamaTarihi}:" for="planlananBaslamaTarihi" />
+                        <p:calendar pattern="dd.MM.yyyy" id="planlananBaslamaTarihi" converter="calendarConverter"  value="#{tssFormuBean.yapilanisler.planlananBaslamaTarihi}" title="PlanlananBaslamaTarihi" />
+                        <h:outputLabel value="#{etiket.PlanlananBitisTarih}:" for="planlananBitisTarihi" />
+                        <p:calendar pattern="dd.MM.yyyy" id="planlananBitisTarihi" converter="calendarConverter"  value="#{tssFormuBean.yapilanisler.planlananBitisTarihi}" title="PlanlananBitisTarihi" />
+                        <h:outputLabel value="#{etiket.GerceklesenBaslamaTarihi}:" for="gerceklesenBaslamaTarihi" />
+                        <p:calendar pattern="dd.MM.yyyy" id="gerceklesenBaslamaTarihi" converter="calendarConverter"  value="#{tssFormuBean.yapilanisler.gerceklesenBaslamaTarihi}" title="GerceklesenBaslamaTarihi" />
+                        <h:outputLabel value="#{etiket.gerceklesenBitisTarihi}:" for="gerceklesenBitisTarihi" />
+                        <p:calendar pattern="dd.MM.yyyy" id="gerceklesenBitisTarihi" converter="calendarConverter"  value="#{tssFormuBean.yapilanisler.gerceklesenBitisTarihi}" title="GerceklesenBitisTarihi" />
+                        <h:outputLabel value="Durum:" for="isDurum" />
+                        <h:selectOneMenu id="isDurum" value="#{tssFormuBean.yapilanisler.isDurum}" title="IsDurum"  >
+                            <f:selectItem noSelectionOption="true" itemLabel="#{etiket.seciniz}"/>
+                            <f:selectItems value="#{applicationBean.isDurum}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{etiket.TaseronBilgileri}:" for="taseronBilgileri" />
+                        <p:inputText id="taseronBilgileri" value="#{tssFormuBean.yapilanisler.taseronBilgileri}" title="TaseronBilgileri" />
+                        <h:outputLabel value="#{etiket.taseronIletisimBilgileri}:" for="taseronIletisimBilgileri" />
+                        <p:inputText id="taseronIletisimBilgileri" value="#{tssFormuBean.yapilanisler.taseronIletisimBilgileri}" title="TaseronIletisimBilgileri" />
+                        <h:outputLabel value="#{etiket.aciklama}:" for="aciklama" />
+                        <p:inputText id="aciklama" value="#{tssFormuBean.yapilanisler.aciklama}" title="Aciklama" />
+                    </h:panelGrid>
+                    <p:commandButton onclick="dlg_yeniIslem.hide()"  value="#{etiket.iptal}" type="reset"/>
+                    <p:commandButton  value="#{tssFormuBean.yapilanisler.dbYapilanIslerID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{tssFormuBean.saveYapilanIs_actionListener}" ajax="false"/>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+
+
+        <h:form id="frm_yeniYorum" prependId="false">
+            <p:dialog widgetVar="dlg_yeniYorum"  modal="true" draggable="true" header="Yorum Ekle" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel id="pnl_yeniYorum" toggleable="false" closable="false" widgetVar="pnl_yeniYorum" visible="true" >
+
+
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Telekom Yorum:"  />
+                        <h:inputText id="telekomYorum" value="#{tssFormuBean.yorumlarTablo.telekomYorum}" title="TelekomYorum" />
+                        <h:outputLabel value="Telekom Yorum Tarihi:"  />
+                        <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="telekomYorumTarihi" value="#{tssFormuBean.yorumlarTablo.telekomYorumTarihi}" title="TelekomYorumTarihi" />
+                        <h:outputLabel value="Vendor Yorum:" for="vendorYorum" />
+                        <p:inputText id="vendorYorum" value="#{tssFormuBean.yorumlarTablo.vendorYorum}" title="VendorYorum" />
+                        <h:outputLabel value="Vendor Yorum Tarihi:" for="vendorYorumTarihi" />
+                        <p:calendar pattern="dd.MM.yyyy" converter="calendarConverter" id="vendorYorumTarihi" value="#{tssFormuBean.yorumlarTablo.vendorYorumTarihi}" title="VendorYorumTarihi" />
+                    </h:panelGrid>
+
+
+                    <p:commandButton onclick="dlg_yeniYorum.hide()"  value="#{etiket.iptal}" type="reset"/>
+                    <p:commandButton  value="#{tssFormuBean.yorumlarTablo.dbYorumlarID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{tssFormuBean.saveYorum_actionListener}" ajax="false"/>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>
+
+

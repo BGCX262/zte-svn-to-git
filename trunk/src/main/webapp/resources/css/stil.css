@@ -1,0 +1,37 @@
+.MainContent {
+    background-image: url(../imajlar/login_back.jpg);
+    background-repeat: no-repeat;
+}
+.login {
+    background-image: url(../imajlar/fon.jpg);
+    background-repeat: repeat-y;
+    margin: 0;
+    padding: 0;
+}
+.login-div{
+    margin: 0;
+    padding:0;
+    background-image: url(../imajlar/login_back.jpg);
+    background-repeat: no-repeat;
+
+
+}
+#headerTablo{
+    background-image: url(../imajlar/header_3.jpg);
+    background-repeat: no-repeat;
+}
+.ui-widget {
+    font-size: 11px !important;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0 !important;
+}
+
+
+
+
+tr{
+    vertical-align: top;
+    text-align: left;
+}

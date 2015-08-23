@@ -1,0 +1,123 @@
+<ui:composition template="#{lnk.sablon}"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        #{etiket.tssFormu}
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+
+                    <p:commandButton value="#{etiket.ekle}" onclick="dlg_yeniAltIslem.show()"
+                                     image="ui-icon ui-icon-person" update="grid"
+                                     process="frm_yeniAltIslem"/>
+
+                </p:toolbarGroup>
+
+            </p:toolbar>
+            <p:spacer height="5" />
+            <div style="margin-left: 5px">
+                <h2><h:outputText value="Alt Islemler"/></h2>
+
+
+                <p:dataTable value="#{islemEkleBean.altislemtipList}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DbAltIslemTipiID"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dbAltIslemTipiID}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="AltIslemAdi"/>
+                        </f:facet>
+                        <h:outputText value="#{item.altIslemAdi}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aciklama"/>
+                        </f:facet>
+                        <h:outputText value="#{item.aciklama}"/>
+                    </p:column>
+                </p:dataTable>
+
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+
+                    <p:commandButton value="#{etiket.ekle}" onclick="dlg_yeniUstIslem.show()"
+                                     image="ui-icon ui-icon-person" update="grid"
+                                     process="frm_yeniUstIslem"/>
+
+                </p:toolbarGroup>
+
+            </p:toolbar>
+            <p:spacer height="5" />
+
+            <div style="margin-left: 5px">
+                <h2><h:outputText value="Ust Islemler"/></h2>
+              
+                    <h:form>
+                        <p:dataTable value="#{islemEkleBean.ustislemtipList}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="DbUstIslemTipiID"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dbUstIslemTipiID}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="UstIslemAdi"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ustIslemAdi}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    
+            </div>
+
+        </h:form>
+        <br/>
+        <br/>
+        <p:spacer height="20"/>
+
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:form id="frm_yeniAltIslem" prependId="false">
+            <p:dialog widgetVar="dlg_yeniAltIslem"  modal="true" draggable="true" header="#{etiket.IslemEkle}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel id="pnl_yeniAltIslem" toggleable="false" closable="false" widgetVar="pnl_yeniAltIslem" visible="true" >
+
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="AltIslemAdi:" for="altIslemAdi" />
+                        <h:inputText id="altIslemAdi" value="#{islemEkleBean.altislemtipi.altIslemAdi}" title="AltIslemAdi" required="true" requiredMessage="The AltIslemAdi field is required."/>
+                        <h:outputLabel value="Aciklama:" for="aciklama" />
+                        <h:inputText id="aciklama" value="#{islemEkleBean.altislemtipi.aciklama}" title="Aciklama" />
+                    </h:panelGrid>
+                    <p:commandButton  value="#{islemEkleBean.altislemtipi.dbAltIslemTipiID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{islemEkleBean.saveAltIslemTip_actionListener}" ajax="false"/>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+        <h:form id="frm_yeniUstIslem" prependId="false">
+            <p:dialog widgetVar="dlg_yeniUstIslem"  modal="true" draggable="true" header="#{etiket.IslemEkle}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel id="pnl_yeniUstIslem" toggleable="false" closable="false" widgetVar="pnl_yeniUstIslem" visible="true" >
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="UstIslemAdi:" for="ustIslemAdi" />
+                        <h:inputText id="ustIslemAdi" value="#{islemEkleBean.ustislemtipi.ustIslemAdi}" title="UstIslemAdi" />
+                    </h:panelGrid>
+                    <p:commandButton  value="#{islemEkleBean.ustislemtipi.dbUstIslemTipiID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{islemEkleBean.saveUstIslemTip_actionListener}" ajax="false"/>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+

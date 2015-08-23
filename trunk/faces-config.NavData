@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="index.jsp" x="150" y="750" zoom="true"/>
+        <Node id="resources/sablon/1/sablon.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="content/index.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="content/sitePlanlanan/sitePlanlanan.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="content/siteSarf/siteSarf.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="resources/sablon/1/header.xhtml" x="65" y="286" zoom="true"/>
+        <Node id="giris/giris.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="content/elektrikTablo/elektrikYonetim.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="content/userTablo/kullaniciYonetimi.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="YetkinizYok.xhtml" x="400" y="300" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="#{lnk.sablon}"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        #{etiket.tumKullanicilar}
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+
+                    <p:commandButton value="#{etiket.ekle}" image="ui-icon ui-icon-person" oncomplete="kullaniciDialog.show()"
+                                     actionListener="#{kullaniciYonetimi.yeniHazirla}" process="@this"/>
+                </p:toolbarGroup>
+
+            </p:toolbar>
+            <p:spacer height="10" />
+
+            <h1><h:outputText value="#{etiket.kullaniciListesi}"/></h1>
+            <p:dataTable value="#{kullaniciYonetimi.kullanicilar}" var="item"
+                         id="kullanicilar" emptyMessage="#{etiket.kayitYok}" style="margin-top:28px"
+                         selectionMode="single" onRowSelectUpdate="grid" onselectComplete="kullaniciDialog.show()"
+                         selection="#{kullaniciYonetimi.kullanici}"
+                         paginator="true" rows="10" rowSelectListener="#{kullaniciYonetimi.detayHazirla}" paginatorPosition="bottom">
+                <f:facet name="header">
+                    #{etiket.tumKullanicilar}
+                </f:facet>
+               
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Vendor"/>
+                    </f:facet>
+                    <h:outputText value="#{item.vendor}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Kullanici Adi"/>
+                    </f:facet>
+                    <h:outputText value="#{item.userName}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Sifre"/>
+                    </f:facet>
+                    <h:outputText value="#{item.password}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Son Giris Tarihi"/>
+                    </f:facet>
+                    <h:outputText converter="calendarConverter" value="#{item.sonGirisTarihi}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Isim"/>
+                    </f:facet>
+                    <h:outputText value="#{item.isim}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Soyisim"/>
+                    </f:facet>
+                    <h:outputText value="#{item.soyisim}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Telefon"/>
+                    </f:facet>
+                    <h:outputText value="#{item.telefon}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Eposta"/>
+                    </f:facet>
+                    <h:outputText value="#{item.eposta}"/>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form prependId="false">
+            
+
+            <p:dialog widgetVar="kullaniciDialog" modal="true" draggable="false" header="#{etk.grup}" showEffect="fade" hideEffect="fade"  width="550">
+
+            </p:dialog>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

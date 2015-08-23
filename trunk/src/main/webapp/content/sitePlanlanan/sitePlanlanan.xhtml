@@ -1,0 +1,390 @@
+<ui:composition template="#{lnk.sablon}"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        #{etiket.sitePlanlananBean}
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+
+                    <p:commandButton value="#{etiket.ekle}" onclick="dlg_yeni.show()"
+                                     actionListener="#{sitePlanlananBean.yeniIcinFormHazirla}"
+                                     image="ui-icon ui-icon-person" update="pnl_SitePlanlanan"
+                                     process="frm_Planlanan"/>
+
+                </p:toolbarGroup>
+
+            </p:toolbar>
+            <p:spacer height="10" />
+            <h2><h:outputText value="#{etiket.sitePlanlanan}"/></h2>
+
+            <h:panelGrid columns="2">
+
+                <h:panelGrid columns="1">
+                    <p:dataTable value="#{sitePlanlananBean.lazyModel}" var="row" lazy="true"
+                                 emptyMessage="#{etiket.kayitYok}"
+                                 selectionMode="single" onRowSelectUpdate="pnl_SitePlanlanan"
+                                 selection="#{sitePlanlananBean.selectedRow}"
+                                 onselectComplete="dlg_yeni.show()"
+                                 rowSelectListener="#{sitePlanlananBean.row_selectListener}"
+                                 paginator="true" rows="1" paginatorPosition="bottom"
+                                 rowsPerPageTemplate="1,5,10,15,20,25"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 >
+
+                        <f:facet name="header">
+                            #{etiket.sitePlanlanan}
+                        </f:facet>
+
+                        <p:column sortBy="#{row.bolge}" filterBy="#{row.bolge}" filterMatchMode="exact" filterOptions="#{applicationBean.abolge}">
+                            <f:facet name="header">
+                                <h:outputText value="#{etiket.bolge}"/>
+                            </f:facet>
+                            <h:outputText value="#{row.bolge}"/>
+                        </p:column>
+                        <p:column sortBy="#{row.faz}">
+                            <f:facet name="header">
+                                <h:outputText value="Faz"/>
+                            </f:facet>
+                            <h:outputText value="#{row.faz}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{etiket.siparisTarihi}"/>
+                            </f:facet>
+                            <h:outputText converter="calendarConverter" value="#{row.siparisTarihi}"/>
+                        </p:column>
+                        <p:column sortBy="#{row.sahaAdi}">
+                            <f:facet name="header">
+                                <h:outputText value="${etiket.sahaAd}"/>
+                            </f:facet>
+                            <h:outputText value="#{row.sahaAdi}"/>
+                        </p:column>
+                        <p:column filterBy="#{row.sehirID.dbSehirID}" filterMatchMode="exact"  filterOptions="#{applicationBean.asehir}">
+                            <f:facet name="header" >
+                                <h:outputText value="#{etiket.sehir}"/>
+                            </f:facet>
+                            <h:outputText value="#{row.sehirID.sehir}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{etiket.ilce}"/>
+                            </f:facet>
+                            <h:outputText value="#{row.ilceID.ilceAdi}"/>
+                        </p:column>
+                        <p:column sortBy="#{row.sahaKodu}" filterBy="#{row.sahaKodu}">
+                            <f:facet name="header">
+                                <h:outputText value="Saha Kodu"/>
+                            </f:facet>
+                            <h:outputText value="#{row.sahaKodu}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Saha Kodu Aday No"/>
+                            </f:facet>
+                            <h:outputText value="#{row.sahaKodu}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{etiket.detay}"/>
+                            </f:facet>
+                            <p:commandButton ajax="false" value="#{etiket.detay}" actionListener="#{sitePlanlananBean.detaySitePlanlanan_actionListener(row)}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{etiket.sil}"/>
+                            </f:facet>
+                            <p:commandButton onclick="dlg_dialog.show()" value="#{etiket.sil}">
+                                <f:setPropertyActionListener value="#{row.dbSiteID}" target="#{sitePlanlananBean.rowId}"/>
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+                    <p:panel rendered="#{sitePlanlananBean.render_dtPlanlanan}" id="pnl_SiteSarfDt">
+                        <h2><h:outputText value="#{sitePlanlananBean.selectedRow.sahaKodu} - #{etiket.NominalPlanSarfBilgileri}"/></h2>
+
+                        <p:toolbar>
+                            <p:toolbarGroup align="left">
+                                <p:commandButton value="#{etiket.ekle}" onclick="dlg_yeniSiteSarf.show()" actionListener="#{sitePlanlananBean.sarf_initBean}" image="ui-icon ui-icon-person" update="pnl_SiteSarf" process="frm_SiteSarf"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+                        <p:dataTable value="#{sitePlanlananBean.siteSarfs}" var="item"
+                                     emptyMessage="#{etiket.kayitYok}" style="margin-top:28px"
+                                     selectionMode="single" onRowSelectUpdate="pnl_SiteSarf"
+                                     selection="#{sitePlanlananBean.selectedRow_sf}" onselectComplete="dlg_yeniSiteSarf.show()"
+                                     rowSelectListener="#{sitePlanlananBean.sarf_row_selectListener}"
+                                     paginator="true" rows="10"  paginatorPosition="bottom">
+
+                            <f:facet name="header">
+                                #{etiket.siteSarfListesi}
+                            </f:facet>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Aday No"/>
+                                </f:facet>
+                                <h:outputText  value="#{item.dbSiteSarfID}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{etiket.HazirlanmaTarihi}"/>
+                                </f:facet>
+                                <h:outputText  converter="calendarConverter"  value="#{item.hazirlanmaTarihi}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Sunulma Tarihi"/>
+                                </f:facet>
+                                <h:outputText  converter="calendarConverter"  value="#{item.sunulmaTarihi}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Onay Tarihi"/>
+                                </f:facet>
+                                <h:outputText  converter="calendarConverter"  value="#{item.onayTarihi}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{etiket.indir}"/>
+                                </f:facet>
+                                <p:commandButton ajax="false" value="#{etiket.indir}" rendered="#{item.sarfDokumanDosyaYolu!=null}" actionListener="#{sitePlanlananBean.downloadDokuman(row.sarfDokumanDosyaYolu)}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{etiket.detay}"/>
+                                </f:facet>
+                                <p:commandButton value="#{etiket.detay}" rendered="#{item.onayDurum.value=='Onaylandi' || item.isColocated==true}" action="#{sitePlanlananBean.sitePlanlananYonlendir(item)}"/>
+
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="sil"/>
+                                </f:facet>
+                                <p:commandButton onclick="dlg_SiteSarf_Remove.show()" value="#{etiket.sil}">
+                                    <f:setPropertyActionListener value="#{item.dbSiteSarfID}" target="#{sitePlanlananBean.remove_sarf_row_id}"/>
+                                </p:commandButton>
+                            </p:column>
+
+
+
+                        </p:dataTable>
+                    </p:panel>
+                </h:panelGrid>
+
+
+
+
+                <p:dataTable value="#{sitePlanlananBean.yapilanislers}" var="row"
+                             emptyMessage="#{etiket.kayitYok}" 
+                             rows="15" paginator="true" paginatorPosition="bottom"
+                             >
+
+                    <f:facet name="header">
+                        #{etiket.yapilanIsler}
+                    </f:facet>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{etiket.ustislem}"/>
+                        </f:facet>
+                        <h:outputText value="#{row.dbUstIslemTipiID.ustIslemAdi}"/>
+                    </p:column>
+                    <p:column >
+                        <f:facet name="header">
+                            <h:outputText value="#{etiket.altislem}"/>
+                        </f:facet>
+                        <h:outputText value="#{row.dbAltIslemTipiID.altIslemAdi}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ger.Bit. Tarihi"/>
+                        </f:facet>
+                        <h:outputText converter="calendarConverter"  value="#{row.gerceklesenBaslamaTarihi}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Plan.Bit. Tarihi"/>
+                        </f:facet>
+                        <h:outputText converter="calendarConverter"  value="#{row.planlananBaslamaTarihi}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Durum"/>
+                        </f:facet>
+                        <h:outputText  value="#{row.isDurum}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+
+        </h:form>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="frm_Planlanan" prependId="false">
+            <p:dialog widgetVar="dlg_yeni" closeOnEscape="false" closable="false"  modal="true" draggable="true" header="#{etiket.sitePlanlanan} -  #{etiket.vendor} : #{sessionBean.userTablo.vendor}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel id="pnl_SitePlanlanan" toggleable="false" closable="false" widgetVar="pnl_SitePlanlanan" visible="true" >
+                    <h:panelGrid columns="2">
+
+
+
+
+                        <h:outputText value="#{etiket.bolge}" />
+                        <h:selectOneMenu value="#{sitePlanlananBean.selectedRow.bolge}">
+                            <f:selectItem noSelectionOption="true" itemLabel="#{etiket.seciniz}"/>
+                            <f:selectItems value="#{applicationBean.bolge}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputText value="*#{etiket.sehir}" />
+                        <h:selectOneMenu  valueChangeListener="#{sitePlanlananBean.sarf_sehir_valueChangeListener}" value="#{sitePlanlananBean.ilKod}"  >
+                            <f:selectItem noSelectionOption="true" itemLabel="Seciniz" />
+                            <f:selectItems value="#{applicationBean.sehir}" />
+                            <f:ajax event="change" execute="@this" render="ddIlce"/>
+                        </h:selectOneMenu>
+
+                        <h:outputText value="*#{etiket.ilce}" />
+                        <h:selectOneMenu id="ddIlce" value="#{sitePlanlananBean.ilceKod}"  >
+                            <f:selectItems value="#{applicationBean.ilce4SelectList(sitePlanlananBean.ilKod)}" />
+                        </h:selectOneMenu>
+
+                        <h:outputText value="#{etiket.faz}" />
+                        <p:inputText value="#{sitePlanlananBean.selectedRow.faz}"   />
+
+                        <h:outputText value="#{etiket.siparisTarihi}" />
+                        <p:calendar converter="calendarConverter" navigator="true" pattern="dd.MM.yyyy"  yearRange="1920:2100"  locale="tr" value="#{sitePlanlananBean.selectedRow.siparisTarihi}"/>
+
+                        <h:outputText value="#{etiket.sahaAd}" />
+                        <p:inputText  value="#{sitePlanlananBean.selectedRow.sahaAdi}"  />
+
+                        <h:outputText value="#{etiket.sahaKod}" />
+                        <p:inputText  value="#{sitePlanlananBean.selectedRow.sahaKodu}"/>
+                    </h:panelGrid>
+                    <p:commandButton ajax="false" actionListener="#{sitePlanlananBean.yeniIcinFormHazirla}" onclick="dlg_yeni.hide()"  value="#{etiket.iptal}" />
+                    <p:commandButton ajax="false"  value="#{sitePlanlananBean.selectedRow.dbSiteID==null?etiket.kaydet:etiket.guncelle}" actionListener="#{sitePlanlananBean.save_actionListener}"/>
+
+                </p:panel>
+
+            </p:dialog>
+        </h:form>
+
+        <h:form prependId="false">
+            <p:growl showDetail="true" />
+
+            <p:dialog widgetVar="dlg_dialog"  modal="true" draggable="false" header="#{etiket.uyari}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel toggleable="false" closable="false" widgetVar="pnl_SitePlanlanan_dialog" visible="true" >
+                    <h:panelGrid columns="1">
+                        <h:outputText value="#{etiket.secilenSatirSilinecek}"/>
+                    </h:panelGrid>
+                    <f:verbatim/>
+                    <h:panelGrid columns="2">
+                        <p:commandButton ajax="false"  value="#{etiket.iptal}" action="sitePlanlananBean"/>
+                        <p:commandButton ajax="false"  value="#{etiket.sil}" actionListener="#{sitePlanlananBean.remove_actionListener}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+            </p:dialog>
+        </h:form>
+
+        <h:form id="frm_SiteSarf" prependId="false">
+            <p:dialog widgetVar="dlg_yeniSiteSarf"  modal="true" draggable="true" header="#{etiket.siteSarfListesi} -  #{etiket.vendor} : #{sessionBean.userTablo.vendor}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel id="pnl_SiteSarf" toggleable="false" closable="false" widgetVar="pnl_SiteSarf" >
+                    <h:panelGrid columns="2">
+
+                        <h:outputText value="#{etiket.sahaKodAdayNo}" />
+                        <p:inputText value="#{sitePlanlananBean.selectedRow_sf.adayNo}"  />
+
+                        <h:outputText value="#{etiket.isColocated}" />
+                        <h:selectBooleanCheckbox value="#{sitePlanlananBean.selectedRow_sf.isColocated}"/>
+
+                        <h:outputText value="Onay Durum" />
+
+                        <h:selectOneMenu value="#{sitePlanlananBean.selectedRow_sf.onayDurum}">
+                            <f:selectItem noSelectionOption="true" itemLabel="Seciniz"/>
+                            <f:selectItems value="#{applicationBean.onayDurum}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputText value="Onay Tarih" />
+                        <p:calendar converter="calendarConverter" pattern="dd.MM.yyyy" value="#{sitePlanlananBean.selectedRow_sf.onayTarihi}"/>
+
+                        <h:outputText value="#{etiket.mucbirSebepBaslangicTarihi}" />
+                        <p:calendar converter="calendarConverter" navigator="true" pattern="dd.MM.yyyy"  yearRange="1920:2100"  locale="tr" value="#{sitePlanlananBean.selectedRow_sf.mucbirSebepBaslangicTarihi}"  />
+
+                        <h:outputText value="#{etiket.mucbirSebepBitisTarihi}" />
+                        <p:calendar converter="calendarConverter" navigator="true" pattern="dd.MM.yyyy" yearRange="1920:2100"  locale="tr" value="#{sitePlanlananBean.selectedRow_sf.mucbirSebepBitisTarihi}"  />
+
+                        <h:outputText value="#{etiket.kuleYukseklik}" />
+                        <p:inputMask mask="?9999"  value="#{sitePlanlananBean.selectedRow_sf.kuleYukseklik}"/>
+
+                        <h:outputText value="#{etiket.enlem}" />
+                        <p:inputText value="#{sitePlanlananBean.selectedRow_sf.enlem}"/>
+
+                        <h:outputText value="#{etiket.boylam}" />
+                        <p:inputText value="#{sitePlanlananBean.selectedRow_sf.boylam}"/>
+
+                        <h:outputText value="#{etiket.sahaSonDurumu}" />
+                        <p:inputText value="#{sitePlanlananBean.selectedRow_sf.sahaSonDurumu}"/>
+
+                        <h:outputText value="#{etiket.transmisyonYolu}" />
+                        <p:inputText value="#{sitePlanlananBean.selectedRow_sf.transmisyonYolu}"/>
+
+                        <h:outputText value="#{etiket.transmisyonYontemi}" />
+                        <h:selectOneMenu value="#{sitePlanlananBean.selectedRow_sf.transmisyonYontemi}">
+                            <f:selectItem noSelectionOption="true" itemLabel="Seciniz"/>
+                            <f:selectItems value="#{applicationBean.transmisyonYontemi}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputText value="#{etiket.sarfDokumanDosyaAdi}" />
+                        <h:panelGroup id="pnlGroupUpload">
+                            <p:fileUpload  image="/resources/imajlar/upload.png" style="padding-left: 0px;padding-right: 0px;margin: 0px" update="pnlGroupUpload" label="seciniz" fileUploadListener="#{sitePlanlananBean.handleFileUpload}"
+                                           allowTypes="*.doc;*.docx;*.xlsx;*.jpg;*.gif;*.jpeg"  />
+                            <h:outputText value="#{sitePlanlananBean.selectedRow_sf.sarfDokumanDosyaYolu}" />
+                        </h:panelGroup>
+
+                        <h:outputText value="#{etiket.detayliSahaTipi}" />
+                        <p:inputText value="#{sitePlanlananBean.selectedRow_sf.detayliSahaTipi}"/>
+
+
+                        <h:outputText value="#{etiket.tTsunulmaTarihi}" />
+                        <p:calendar converter="calendarConverter" navigator="true" pattern="dd.MM.yyyy" id="tTsunulmaTarihi" yearRange="1920:2100"  locale="tr" value="#{sitePlanlananBean.selectedRow_sf.sunulmaTarihi}"  />
+
+                        <h:outputText value="#{etiket.HazirlanmaTarihi}" />
+                        <p:calendar converter="calendarConverter" navigator="true" pattern="dd.MM.yyyy"  yearRange="1920:2100"  locale="tr" value="#{sitePlanlananBean.selectedRow_sf.hazirlanmaTarihi}"  />
+
+                        <h:outputText value="#{etiket.enerjiTipi}" />
+                        <h:selectOneMenu value="#{sitePlanlananBean.selectedRow_sf.enerjiTipi}">
+                            <f:selectItem noSelectionOption="true" itemLabel="Seciniz"/>
+                            <f:selectItems value="#{applicationBean.enerjiTip}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <p:commandButton onclick="dlg_yeniSiteSarf.hide()"  value="#{etiket.iptal}" type="reset"/>
+                    <p:commandButton ajax="false"  value="#{sitePlanlananBean.selectedRow_sf.dbSiteSarfID==null?etiket.kaydet:etiket.guncelle}" action="#{sitePlanlananBean.sarf_save_actionListener}"/>
+
+                </p:panel>
+
+            </p:dialog>
+        </h:form>
+
+        <h:form prependId="false">
+            <p:dialog widgetVar="dlg_SiteSarf_Remove"  modal="true" draggable="false" header="#{etiket.uyari}" showEffect="fade" hideEffect="fade"  width="550">
+                <p:panel id="pnl_SiteSarf_Remove" toggleable="false" closable="false" widgetVar="pnl_SiteSarf_Remove">
+                    <h:panelGrid columns="1">
+                        <h:outputText value="#{etiket.secilenSatirSilinecek}"/>
+                    </h:panelGrid>
+                    <f:verbatim/>
+                    <h:panelGrid columns="2">
+                        <p:commandButton onclick="dlg_SarfdialogRemove.hide()"  value="#{etiket.iptal}" type="reset"/>
+                        <p:commandButton ajax="false"  value="#{etiket.sil}" actionListener="#{sitePlanlananBean.sarf_remove_actionListener}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+
